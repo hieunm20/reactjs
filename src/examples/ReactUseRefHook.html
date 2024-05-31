@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function App0() {
+        const [inputValue, setInputValue] = React.useState("");
+        const count = React.useRef(0);
+
+        React.useEffect(() => {
+          count.current = count.current + 1;
+        });
+
+        return (
+          <>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <h1>Render Count: {count.current}</h1>
+          </>
+        );
+      }
+
+      function TrackingStateChange() {
+        const [inputValue, setInputValue] = React.useState("");
+        const previousInputValue = React.useRef("");
+        React.useEffect(() => {
+          previousInputValue.current = inputValue;
+        }, [inputValue]);
+        return (
+          <>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <h2>Current Value: {inputValue}</h2>
+            <h2>Previous Value: {previousInputValue.current}</h2>
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<TrackingStateChange />);
+    </script>
+  </body>
+</html>
