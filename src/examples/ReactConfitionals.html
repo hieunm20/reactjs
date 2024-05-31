@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Garage(props) {
+        const cars = props.cars;
+        return (
+          <>
+            <h1>Garage</h1>
+            {cars.length > 0 && (
+              <h2>You have {cars.length} cars in your garage.</h2>
+            )}
+          </>
+        );
+      }
+
+      const cars = ["Ford", "BMW", "Audi"];
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Garage cars={cars} />);
+    </script>
+  </body>
+</html>

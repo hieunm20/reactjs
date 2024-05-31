@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function MyForm() {
+        const [inputs, setInputs] = React.useState({});
+        const [textarea, setTextarea] = React.useState("textarea");
+        const [myCar, setMyCar] = React.useState("Volvo");
+
+        const handleChange = (event) => {
+          const name = event.target.name;
+          const value = event.target.value;
+          setInputs((values) => ({ ...values, [name]: value }));
+
+          if (name == "description") {
+            setTextarea(value);
+          }
+          if (name == "select") {
+            setMyCar(event.target.value);
+          }
+        };
+
+        const handleSubmit = (event) => {
+          event.preventDefault();
+          alert(inputs);
+        };
+
+        return (
+          <form onSubmit={handleSubmit}>
+            <div>
+              Enter your name:
+              <input
+                type="text"
+                name="username"
+                value={inputs.username || ""}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              Enter your age:
+              <input
+                type="number"
+                name="age"
+                value={inputs.age || ""}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <textarea
+                name="description"
+                value={textarea}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <select name="select" value={myCar} onChange={handleChange}>
+                <option value="Ford">Ford</option>
+                <option value="Volvo">Volvo</option>
+                <option value="Fiat">Fiat</option>
+              </select>
+            </div>
+            <input type="submit" />
+          </form>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<MyForm />);
+    </script>
+  </body>
+</html>

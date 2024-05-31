@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function Football1() {
+        const shoot = (a) => {
+          alert(a);
+        };
+
+        return <button onClick={() => shoot("Goal!")}>Take the shot!</button>;
+      }
+
+      function Football2() {
+        const shoot = (a, b) => {
+          alert(b.type);
+          /*
+            'b' represents the React event that triggered the function,
+            in this case the 'click' event
+          */
+        };
+
+        return (
+          <button onClick={(event) => shoot("Goal!", event)}>
+            Take the shot!
+          </button>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Football2 />);
+    </script>
+  </body>
+</html>
